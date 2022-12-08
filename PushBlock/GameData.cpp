@@ -14,9 +14,9 @@ int GameData::InData(int x, int y, char IN)
 
 int GameData::OutData()
 {
-	for (int y = 0; y < 5; y++)
+	for (int y = 0; y < mapsizeY; y++)
 	{
-		for (int x = 0; x < 9; x++)
+		for (int x = 0; x < mapsizeX; x++)
 		{
 			std::cout << MainData._map[y][x];
 		}
@@ -27,49 +27,49 @@ int GameData::OutData()
 
 int GameData::BoxCheck(int x, int y, char point)
 {
-	if (MainData._map[y][x + 1] == MainData._map[Boxy1][Boxx1] && point == 'd')
+	if (y == Boxy1 && x + 1 ==Boxx1 && point == 'd')
 	{
 		GameData::InData(Boxx1, Boxy1, ' ');
 		GameData::InData(Boxx1 + 1, Boxy1, 'o');
 		Boxx1++;
 	}
-	else if (MainData._map[y][x - 1] == MainData._map[Boxy1][Boxx1] && point == 'a')
+	else if (y == Boxy1 && x - 1 == Boxx1 && point == 'a')
 	{
 		GameData::InData(Boxx1, Boxy1, ' ');
 		GameData::InData(Boxx1 - 1, Boxy1, 'o');
 		Boxx1--;
 	}
-	else if (MainData._map[y - 1][x] == MainData._map[Boxy1][Boxx1] && point == 'w')
+	else if (y - 1 == Boxy1 && x == Boxx1 && point == 'w')
 	{
 		GameData::InData(Boxx1, Boxy1, ' ');
 		GameData::InData(Boxx1, Boxy1 - 1, 'o');
 		Boxy1--;
 	}
-	else if (MainData._map[y + 1][x] == MainData._map[Boxy1][Boxx1] && point == 's')
+	else if (y + 1 == Boxy1 && x == Boxx1 && point == 's')
 	{
 		GameData::InData(Boxx1, Boxy1, ' ');
 		GameData::InData(Boxx1, Boxy1 + 1, 'o');
 		Boxy1++;
 	}
-	else if (MainData._map[y][x + 1] == MainData._map[Boxy2][Boxx2] && point == 'd')
+	else if (y == Boxy2 && x + 1 == Boxx2 && point == 'd')
 	{
 		GameData::InData(Boxx2, Boxy2, ' ');
 		GameData::InData(Boxx2 + 1, Boxy2, 'o');
 		Boxx2++;
 	}
-	else if (MainData._map[y][x - 1] == MainData._map[Boxy2][Boxx2] && point == 'a')
+	else if (y == Boxy2 && x - 1 == Boxx2 && point == 'a')
 	{
 		GameData::InData(Boxx2, Boxy2, ' ');
 		GameData::InData(Boxx2 - 1, Boxy2, 'o');
 		Boxx2--;
 	}
-	else if (MainData._map[y - 1][x] == MainData._map[Boxy2][Boxx2] && point == 'w')
+	else if (y - 1 == Boxy2 && x == Boxx2 && point == 'w')
 	{
 		GameData::InData(Boxx2, Boxy2, ' ');
 		GameData::InData(Boxx2, Boxy2 - 1, 'o');
 		Boxy2--;
 	}
-	else if (MainData._map[y + 1][x] == MainData._map[Boxy2][Boxx2] && point == 's')
+	else if (y + 1 == Boxy2 && x == Boxx2 && point == 's')
 	{
 		GameData::InData(Boxx2, Boxy2, ' ');
 		GameData::InData(Boxx2, Boxy2 + 1, 'o');
@@ -79,6 +79,7 @@ int GameData::BoxCheck(int x, int y, char point)
 	{
 		return 0;
 	}
+	return 0;
 }
 
 char GameData::WallCheck(int x, int y)
