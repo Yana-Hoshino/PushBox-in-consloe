@@ -5,7 +5,8 @@ class GameData
 public:
 	static int InData(int x, int y, char IN);
 	static int OutData();
-	static char WallCheck(int x, int y);
+	static int reset();
+	static char WallCheck(int x, int y, char point);
 	static int BoxCheck(int x, int y, char point);
 	static char BoxWallCheck(int x, int y, char point);
 	static std::string TwoBoxCheck(int x, int y, char point);
@@ -18,10 +19,11 @@ private:
 	const static int mapsizeY = 10;
 	char _map[mapsizeY][mapsizeX] = 
 					{	{"###################"},
-						{"#    p            #"},
-						{"# oo              #"},
-						{"#     ..          #"},
-						{"#                 #"},
+		                {"#                 #"},
+						{"# oo p            #"},
+						{"#   ##  #         #"},
+						{"# #   ..###########"},
+						{"#   ##            #"},
 						{"#                 #"},
 						{"#                 #"},
 						{"#                 #"},

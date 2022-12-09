@@ -5,12 +5,10 @@ int Boxx1 = 2;
 int Boxy1 = 2;
 int Boxx2 = 3;
 int Boxy2 = 2;
-bool goal1 = 0;
-bool goal2 = 0;
 int goal1x = 6;
-int goal1y = 3;
+int goal1y = 4;
 int goal2x = 7;
-int goal2y = 3;
+int goal2y = 4;
 
 int GameData::InData(int x, int y, char IN)
 {
@@ -96,39 +94,23 @@ int GameData::BoxCheck(int x, int y, char point)
 	return 0;
 }
 
-char GameData::WallCheck(int x, int y)
+char GameData::WallCheck(int x, int y, char point)
 {
-	if (MainData._map[y][x + 1] == '#' && MainData._map[y - 1][x] == '#')
+	if (MainData._map[y][x + 1] == '#' && point == 'd')
 	{
-		return '9';
+		return 1;
 	}
-	else if (MainData._map[y][x + 1] == '#' && MainData._map[y + 1][x] == '#')
+	else if (MainData._map[y][x - 1] == '#'&& point == 'a')
 	{
-		return '3';
+		return 1;
 	}
-	else if (MainData._map[y][x - 1] == '#' && MainData._map[y - 1][x] == '#')
+	else if (MainData._map[y + 1][x] == '#' && point == 's')
 	{
-		return '7';
+		return 1;
 	}
-	else if (MainData._map[y][x - 1] == '#' && MainData._map[y + 1][x] == '#')
+	else if (MainData._map[y - 1][x] == '#' && point == 'w')
 	{
-		return '1';
-	}
-	else if (MainData._map[y][x + 1] == '#')
-	{
-		return 'R';
-	}
-	else if (MainData._map[y][x - 1] == '#')
-	{
-		return 'L';
-	}
-	else if (MainData._map[y + 1][x] == '#')
-	{
-		return 'D';
-	}
-	else if (MainData._map[y - 1][x] == '#')
-	{
-		return 'U';
+		return 1;
 	}
 	else
 	{
@@ -230,4 +212,17 @@ int GameData::WinCheck()
 		return 0;
 	}
 	return 1;
+}
+
+int GameData::reset()
+{
+	GameData::InData(Boxx1, Boxy1, ' ');
+	GameData::InData(Boxx2, Boxy2, ' ');
+	Boxx1 = 2;
+	Boxy1 = 2;
+	Boxx2 = 3;
+	Boxy2 = 2;
+	GameData::InData(Boxx1, Boxy1, 'o');
+	GameData::InData(Boxx2, Boxy2, 'o');
+	return 0;
 }
