@@ -1,14 +1,15 @@
 #include "GameData.h"
 #include <iostream>
+#include <sstream>
 GameData MainData;
-int Boxx1 = 2;
-int Boxy1 = 2;
-int Boxx2 = 3;
-int Boxy2 = 2;
-int goal1x = 6;
-int goal1y = 4;
-int goal2x = 7;
-int goal2y = 4;
+int Boxx1 = GameData::FindBox(1)[0] - '0';
+int Boxy1 = GameData::FindBox(1)[1] - '0';
+int Boxx2 = GameData::FindBox(2)[0] - '0';
+int Boxy2 = GameData::FindBox(2)[1] - '0';
+int goal1x = GameData::FindGoal(1)[0] - '0';
+int goal1y = GameData::FindGoal(1)[1] - '0';
+int goal2x = GameData::FindGoal(2)[0] - '0';
+int goal2y = GameData::FindGoal(2)[1] - '0';
 
 int GameData::InData(int x, int y, char IN)
 {
@@ -225,4 +226,108 @@ int GameData::reset()
 	GameData::InData(Boxx1, Boxy1, 'o');
 	GameData::InData(Boxx2, Boxy2, 'o');
 	return 0;
+}
+
+std::string GameData::FindPlayer()
+{
+	int y = 0;
+	int x = 0;
+	for (y = 0; y < mapsizeY; y++)
+	{
+		for (x = 0; x < mapsizeX; x++)
+		{
+			if (MainData._map[y][x] == 'p')
+			{
+				break;
+			}
+		}
+		if (MainData._map[y][x] == 'p')
+		{
+			break;
+		}
+	}
+	std::stringstream resstream;
+	resstream << x << y;
+	std::string res = resstream.str();
+	return res;
+}
+
+std::string GameData::FindBox(int Num)
+{
+	int y = 0;
+	int x = 0;
+	for (y = 0; y < mapsizeY; y++)
+	{
+		for (x = 0; x < mapsizeX; x++)
+		{
+			if (MainData._map[y][x] == 'o')
+			{
+				break;
+			}
+		}
+		if (MainData._map[y][x] == 'o')
+		{
+			break;
+		}
+	}
+	if (Num == 2) {
+	for (y; y < mapsizeY; y++)
+	{
+		for (x += 1; x < mapsizeX; x++)
+		{
+			if (MainData._map[y][x] == 'o')
+			{
+				break;
+			}
+		}
+		if (MainData._map[y][x] == 'o')
+		{
+			break;
+		}
+	}
+	}
+	std::stringstream resstream;
+	resstream << x << y;
+	std::string res = resstream.str();
+	return res;
+}
+
+std::string GameData::FindGoal(int Num)
+{
+	int y = 0;
+	int x = 0;
+	for (y = 0; y < mapsizeY; y++)
+	{
+		for (x = 0; x < mapsizeX; x++)
+		{
+			if (MainData._map[y][x] == '.')
+			{
+				break;
+			}
+		}
+		if (MainData._map[y][x] == '.')
+		{
+			break;
+		}
+	}
+	if (Num == 2) {
+		for (y; y < mapsizeY; y++)
+		{
+			for (x += 1; x < mapsizeX; x++)
+			{
+				if (MainData._map[y][x] == '.')
+				{
+					break;
+				}
+			}
+			if (MainData._map[y][x] == '.')
+			{
+				break;
+			}
+		}
+	}
+	std::stringstream resstream;
+	resstream << x << y;
+	std::string res = resstream.str();
+	return res;
 }

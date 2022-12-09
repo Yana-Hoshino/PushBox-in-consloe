@@ -6,6 +6,9 @@
 
 int main()
 {
+	//std::string a = GameData::FindBox(2);
+	//std::cout << a;
+	//while (1) {}
 	draw::DrawMap();
 	while (GameData::WinCheck())
 	{

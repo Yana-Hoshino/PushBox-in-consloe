@@ -2,8 +2,8 @@
 #include "GameData.h"
 #include <iostream>
 char indata;
-int UserX = 5;
-int UserY = 2;
+int UserX = (int)GameData::FindPlayer()[0] - '0';
+int UserY = (int)GameData::FindPlayer()[1] - '0';
 int input::UserIn()
 {
 	std::cin >> indata;

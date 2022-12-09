@@ -14,6 +14,9 @@ public:
 	static int BoxInGoalCheck(int x, int y);
 	static int GoalPointRebuild();
 	static int WinCheck();
+	static std::string FindPlayer();
+	static std::string FindBox(int Num);
+	static std::string FindGoal(int Num);
 private:
 	const static int mapsizeX = 20;
 	const static int mapsizeY = 10;
