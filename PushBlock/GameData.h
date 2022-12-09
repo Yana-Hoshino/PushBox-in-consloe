@@ -13,10 +13,13 @@ public:
 	static int PlayerInGoalCheck(int x, int y);
 	static int BoxInGoalCheck(int x, int y);
 	static int GoalPointRebuild();
-	static int WinCheck();
-	static std::string FindPlayer();
-	static std::string FindBox(int Num);
-	static std::string FindGoal(int Num);
+	static int ClearCheck();
+	static int FindPlayer(char xy);
+	static int FindBox(int Num, char xy);
+	static int FindGoal(int Num, char xy);
+	static int ChangeMap();
+	static int init();
+	static int isWin();
 private:
 	const static int mapsizeX = 20;
 	const static int mapsizeY = 10;
@@ -30,7 +33,7 @@ private:
 						{"#                 #"},
 						{"#                 #"},
 						{"#                 #"},
-						{"###################"}
+						{"###################"},
 					};
 };
 

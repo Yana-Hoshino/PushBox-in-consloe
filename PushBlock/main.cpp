@@ -6,11 +6,11 @@
 
 int main()
 {
-	//std::string a = GameData::FindBox(2);
-	//std::cout << a;
+	//int x = GameData::FindBox(2, 'x');
+	//std::cout << x;
 	//while (1) {}
 	draw::DrawMap();
-	while (GameData::WinCheck())
+	while (GameData::isWin())
 	{
 		input::UserIn();
 		system("cls");

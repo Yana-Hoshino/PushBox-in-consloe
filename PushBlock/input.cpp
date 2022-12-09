@@ -2,8 +2,19 @@
 #include "GameData.h"
 #include <iostream>
 char indata;
-int UserX = (int)GameData::FindPlayer()[0] - '0';
-int UserY = (int)GameData::FindPlayer()[1] - '0';
+int UserX = (int)GameData::FindPlayer('x');
+int UserY = (int)GameData::FindPlayer('y');
+int UserX_Backup = UserX;
+int UserY_Backup = UserY;
+
+int input::plloinit()
+{
+	UserX = (int)GameData::FindPlayer('x');
+	UserY = (int)GameData::FindPlayer('y');
+	UserX_Backup = UserX;
+	UserY_Backup = UserY;
+	return 0;
+}
 int input::UserIn()
 {
 	std::cin >> indata;
@@ -58,11 +69,12 @@ int input::UserIn()
 	else if (indata == 'r')
 	{
 		GameData::InData(UserX, UserY, ' ');
-		UserX = 5;
-		UserY = 2;
+		UserX = UserX_Backup;
+		UserY = UserY_Backup;
 		GameData::InData(UserX, UserY, 'p');
 		GameData::reset();
 	}
+	GameData::ClearCheck();
 	GameData::GoalPointRebuild();
 	return 0;
 }
