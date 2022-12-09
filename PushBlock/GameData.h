@@ -9,6 +9,10 @@ public:
 	static int BoxCheck(int x, int y, char point);
 	static char BoxWallCheck(int x, int y, char point);
 	static std::string TwoBoxCheck(int x, int y, char point);
+	static int PlayerInGoalCheck(int x, int y);
+	static int BoxInGoalCheck(int x, int y);
+	static int GoalPointRebuild();
+	static int WinCheck();
 private:
 	const static int mapsizeX = 20;
 	const static int mapsizeY = 10;
@@ -16,7 +20,7 @@ private:
 					{	{"###################"},
 						{"#    p            #"},
 						{"# oo              #"},
-						{"#                 #"},
+						{"#     ..          #"},
 						{"#                 #"},
 						{"#                 #"},
 						{"#                 #"},

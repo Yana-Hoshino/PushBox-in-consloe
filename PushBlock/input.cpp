@@ -17,6 +17,7 @@ int input::UserIn()
 		GameData::InData(UserX, UserY, ' ');
 		GameData::InData(UserX, UserY - 1, 'p');
 		UserY -= 1;
+		GameData::PlayerInGoalCheck(UserX, UserY);
 	}
 	else if (indata == 'a')
 	{
@@ -27,7 +28,8 @@ int input::UserIn()
 		GameData::BoxCheck(UserX, UserY, 'a');
 		GameData::InData(UserX, UserY, ' ');
 		GameData::InData(UserX - 1, UserY, 'p');
-			UserX -= 1;
+		UserX -= 1;
+		GameData::PlayerInGoalCheck(UserX, UserY);
 	}
 	else if (indata == 's')
 	{
@@ -39,6 +41,7 @@ int input::UserIn()
 		GameData::InData(UserX, UserY, ' ');
 		GameData::InData(UserX, UserY + 1, 'p');
 		UserY += 1;
+		GameData::PlayerInGoalCheck(UserX, UserY);
 	}
 	else if (indata == 'd')
 	{
@@ -50,6 +53,8 @@ int input::UserIn()
 		GameData::InData(UserX, UserY, ' ');
 		GameData::InData(UserX + 1, UserY, 'p');
 		UserX += 1;
+		GameData::PlayerInGoalCheck(UserX, UserY);
 	}
+	GameData::GoalPointRebuild();
 	return 0;
 }
