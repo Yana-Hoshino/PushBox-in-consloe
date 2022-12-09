@@ -8,4 +8,5 @@ public:
 	static char mp3[mapsizeY][mapsizeX];
 	static char mp4[mapsizeY][mapsizeX];
 	static char mp5[mapsizeY][mapsizeX];
+	static char End[mapsizeY][mapsizeX];
 };

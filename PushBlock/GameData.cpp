@@ -6,10 +6,10 @@
 GameData MainData;
 Maps map;
 int MapNum = 0;
-int Boxx1 = GameData::FindBox(1,'x');
-int Boxy1 = GameData::FindBox(1,'y');
-int Boxx2 = GameData::FindBox(2,'x');
-int Boxy2 = GameData::FindBox(2,'y');
+int Boxx1 = GameData::FindBox(1, 'x');
+int Boxy1 = GameData::FindBox(1, 'y');
+int Boxx2 = GameData::FindBox(2, 'x');
+int Boxy2 = GameData::FindBox(2, 'y');
 int Boxx1_Backup = Boxx1;
 int Boxy1_Backup = Boxy1;
 int Boxx2_Backup = Boxx2;
@@ -32,7 +32,7 @@ int GameData::init() {
 	goal1y = GameData::FindGoal(1, 'y');
 	goal2x = GameData::FindGoal(2, 'x');
 	goal2y = GameData::FindGoal(2, 'y');
-	 return 0;
+	return 0;
 }
 
 int GameData::InData(int x, int y, char IN)
@@ -56,7 +56,7 @@ int GameData::OutData()
 
 int GameData::BoxCheck(int x, int y, char point)
 {
-	if (y == Boxy1 && x + 1 ==Boxx1 && point == 'd')
+	if (y == Boxy1 && x + 1 == Boxx1 && point == 'd')
 	{
 		GameData::InData(Boxx1, Boxy1, ' ');
 		GameData::InData(Boxx1 + 1, Boxy1, 'o');
@@ -125,7 +125,7 @@ char GameData::WallCheck(int x, int y, char point)
 	{
 		return 1;
 	}
-	else if (MainData._map[y][x - 1] == '#'&& point == 'a')
+	else if (MainData._map[y][x - 1] == '#' && point == 'a')
 	{
 		return 1;
 	}
@@ -221,7 +221,7 @@ int GameData::GoalPointRebuild()
 {
 	if (MainData._map[goal1y][goal1x] != 'P' && MainData._map[goal1y][goal1x] != 'O')
 	{
-		GameData::InData(goal1x,goal1y, '.');
+		GameData::InData(goal1x, goal1y, '.');
 	}
 	if (MainData._map[goal2y][goal2x] != 'P' && MainData._map[goal2y][goal2x] != 'O')
 	{
@@ -232,10 +232,10 @@ int GameData::GoalPointRebuild()
 
 int GameData::ClearCheck()
 {
-	if (MainData._map[goal1y][goal1x] == 'O' && MainData._map[goal2y][goal2x] == 'O' )
+	if (MainData._map[goal1y][goal1x] == 'O' && MainData._map[goal2y][goal2x] == 'O')
 	{
-
-		GameData::ChangeMap();
+		MapNum++;
+		GameData::ChangeMap(MapNum);
 		GameData::init();
 		input::plloinit();
 		GameData::OutData();
@@ -247,6 +247,9 @@ int GameData::isWin()
 {
 	if (MapNum == 3)
 	{
+		system("cls");
+		GameData::ChangeMap(0);
+		GameData::OutData();
 		return 0;
 	}
 	return 1;
@@ -294,7 +297,7 @@ int GameData::FindBox(int Num, char xy)
 {
 	int y = 0;
 	int x = 0;
-	for (y ; y < mapsizeY; y++)
+	for (y; y < mapsizeY; y++)
 	{
 		for (x = 0; x < mapsizeX; x++)
 		{
@@ -309,23 +312,23 @@ int GameData::FindBox(int Num, char xy)
 		}
 	}
 	if (Num == 2) {
-	int tmp = x + 1;
-	for (y ; y < mapsizeY; y++)
-	{
-		x = tmp;
-		for (x = tmp; x < mapsizeX; x++)
+		int tmp = x + 1;
+		for (y; y < mapsizeY; y++)
 		{
+			x = tmp;
+			for (x = tmp; x < mapsizeX; x++)
+			{
+				if (MainData._map[y][x] == 'o')
+				{
+					break;
+				}
+			}
+			tmp = 0;
 			if (MainData._map[y][x] == 'o')
 			{
 				break;
 			}
 		}
-		tmp = 0;
-		if (MainData._map[y][x] == 'o')
-		{
-			break;
-		}
-	}
 	}
 	if (xy == 'x')
 		return x;
@@ -334,7 +337,7 @@ int GameData::FindBox(int Num, char xy)
 	return 0;
 }
 
-int GameData::FindGoal(int Num,char xy)
+int GameData::FindGoal(int Num, char xy)
 {
 	int y = 0;
 	int x = 0;
@@ -378,45 +381,54 @@ int GameData::FindGoal(int Num,char xy)
 	return 0;
 }
 
-int GameData::ChangeMap()
+int GameData::ChangeMap(int MapNum)
 {
-	MapNum++;
-	if(MapNum == 1)
-	for (int y = 0; y < mapsizeY; y++)
-	{
-		for (int x = 0; x < mapsizeX; x++)
+	if (MapNum == 0)
+		for (int y = 0; y < mapsizeY; y++)
 		{
-			MainData._map[y][x] = map.mp1[y][x];
+			for (int x = 0; x < mapsizeX; x++)
+			{
+				MainData._map[y][x] = map.End[y][x];
+			}
+			std::cout << std::endl;
 		}
-		std::cout << std::endl;
-	}
+	else if (MapNum == 1)
+		for (int y = 0; y < mapsizeY; y++)
+		{
+			for (int x = 0; x < mapsizeX; x++)
+			{
+				MainData._map[y][x] = map.mp1[y][x];
+			}
+			std::cout << std::endl;
+		}
 	else if (MapNum == 2)
-	for (int y = 0; y < mapsizeY; y++)
-	{
-		for (int x = 0; x < mapsizeX; x++)
+		for (int y = 0; y < mapsizeY; y++)
 		{
-			MainData._map[y][x] = map.mp2[y][x];
+			for (int x = 0; x < mapsizeX; x++)
+			{
+				MainData._map[y][x] = map.mp2[y][x];
+			}
+			std::cout << std::endl;
 		}
-		std::cout << std::endl;
-	}
 	else if (MapNum == 3)
-	for (int y = 0; y < mapsizeY; y++)
-	{
-		for (int x = 0; x < mapsizeX; x++)
+		for (int y = 0; y < mapsizeY; y++)
 		{
-			MainData._map[y][x] = map.mp3[y][x];
+			for (int x = 0; x < mapsizeX; x++)
+			{
+				MainData._map[y][x] = map.mp3[y][x];
+			}
+			std::cout << std::endl;
 		}
-		std::cout << std::endl;
-	}
 	else if (MapNum == 4)
-	for (int y = 0; y < mapsizeY; y++)
-	{
-		for (int x = 0; x < mapsizeX; x++)
+		for (int y = 0; y < mapsizeY; y++)
 		{
-			MainData._map[y][x] = map.mp4[y][x];
+			for (int x = 0; x < mapsizeX; x++)
+			{
+				MainData._map[y][x] = map.mp4[y][x];
+			}
+			std::cout << std::endl;
 		}
-		std::cout << std::endl;
-	}
+
 
 	return 0;
 }

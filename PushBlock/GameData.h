@@ -17,7 +17,7 @@ public:
 	static int FindPlayer(char xy);
 	static int FindBox(int Num, char xy);
 	static int FindGoal(int Num, char xy);
-	static int ChangeMap();
+	static int ChangeMap(int MapNum);
 	static int init();
 	static int isWin();
 private:
